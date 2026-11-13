@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "QuizSystem\\x64\\Debug\\QuizSystem.obj",
+            "outputs": [
+                "QuizSystem\\x64\\Debug\\QuizSystem.cpp.obj.dt.module.json",
+                "QuizSystem\\x64\\Debug\\QuizSystem.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
