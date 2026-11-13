@@ -316,39 +316,44 @@ public:
 	Menu() : isAdmin(false) {}
 
 	void run() {
-		if (!login()) {
-			return;
-		}
+		bool appRunning = true;
 
-		bool running = true;
-		while (running) {
-			cout << endl << "===== Main Menu " << (isAdmin ? "(Admin)" : "(Guest)") << " =====" << endl;
-			cout << "1) Create quiz" << endl;
-			cout << "2) Start quiz" << endl;
-			cout << "3) Leader board" << endl;
-			cout << "0) Exit" << endl;
-			int choice = readInt("Choose: ", 0, 3);
-
-			try {
-				if (choice == 1) {
-					createQuiz();
-				}
-				else if (choice == 2) {
-					startQuiz();
-				}
-				else if (choice == 3) {
-					board.show();
-				}
-				else {
-					running = false;
-				}
-			}
-			catch (const Exception& ex) {
-				printException(ex);
+		while (appRunning) {
+			if (!login()) {
+				appRunning = false;
+				break;
 			}
 
-			if (running) {
-				readLine("Press Enter to continue...");
+			bool loggedIn = true;
+			while (loggedIn) {
+				cout << endl << "===== Main Menu " << (isAdmin ? "(Admin)" : "(Guest)") << " =====" << endl;
+				cout << "1) Create quiz" << endl;
+				cout << "2) Start quiz" << endl;
+				cout << "3) Leader board" << endl;
+				cout << "0) Logout" << endl;
+				int choice = readInt("Choose: ", 0, 3);
+
+				try {
+					if (choice == 1) {
+						createQuiz();
+					}
+					else if (choice == 2) {
+						startQuiz();
+					}
+					else if (choice == 3) {
+						board.show();
+					}
+					else {
+						loggedIn = false;
+					}
+				}
+				catch (const Exception& ex) {
+					printException(ex);
+				}
+
+				if (loggedIn) {
+					readLine("Press Enter to continue...");
+				}
 			}
 		}
 		cout << "Goodbye!" << endl;
